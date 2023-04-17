@@ -108,11 +108,9 @@ mismoIntervalo x y
 {- g.
     problema sumaDistintos (x: Z, y: Z,z : Z) : Z {
         requiere: { True }
-        asegura{ (∃s: seq<X>)(x pertenece a s e y pertenece a s y z pertenece a s y noHayOtrosElem(s, x, y, z) y noHayRepetidos(s) res = sumatoria de i = 0 hasta |s|-1) de s[i]}
-        asegura:
+        asegura
         {
-            result = x + y + z <-> x != y != z) creo que estaria mal porque no contempla casos
-            result =
+            (∃s: seq<X>)(x pertenece a s e y pertenece a s y z pertenece a s y noHayOtrosElem(s, x, y, z) y noHayRepetidos(s) res = sumatoria de i = 0 hasta |s|-1) de s[i]
         }
 -}
 sumaDistintos :: Int -> Int -> Int -> Int
@@ -125,16 +123,40 @@ sumaDistintos x y z
 
 {-
 problema esMultiploDe (x: Z, y: Z) : Bool {
-        requiere: { x >= y }
+        la condicion de ser mayor estricto que 1 es porque 1 no es multiplo de nadie.
+        requiere: { x >= y ∧ x > 1 ∧ y > 1 }
         asegura:
         {
             result = true <-> (∃n:Z)(n * y = x)
         }
 -}
 esMultiploDe :: Int -> Int -> Bool
-esMultiploDe x y = x `div` y == 0
+esMultiploDe x y = x `mod` y == 0
+
+{-
+problema digitoUnidades(n: Z) : Z {
+        requiere: { n > 0 }
+        asegura:
+        {
+            res = ultimoDigito(n)
+        }
+-}
+digitoUnidades :: Int -> Int
+digitoUnidades n = n `mod` 10
+
+{-
+problema digitoDecenas(n: Z) : Z {
+        requiere: { n > 0 }
+        asegura:
+        {
+            res = anteUltimoDigito(n)
+        }
+-}
+digitoDecenas :: Int -> Int
+digitoDecenas n = (n `div` 10) `mod` 10
 
 -- 4f.
+
 {-
 En la especificacion todo ocurre de manera simultanea, no sistematica.
 
