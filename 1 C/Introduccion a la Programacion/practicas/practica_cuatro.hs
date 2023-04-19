@@ -13,13 +13,25 @@ parteEntera n
 
 -- 3.
 esDivisible :: Integer -> Integer -> Bool
-esDivisible n1 n2
-  | n1 == 0 = True
-  | n1 == 1 = False
-  | otherwise = esDivisible (n1 - n2) n2
+esDivisible 0 n2 = True
+esDivisible 1 n2 = False
+esDivisible n1 n2 = esDivisible (n1 - n2) n2
+
+-- 4
+sumaImpares :: Integer -> Integer
+sumaImpares 0 = 0
+sumaImpares n = (2 * n - 1) + sumaImpares (n - 1)
+
+-- 5
+medioFact :: Integer -> Integer
+medioFact 0 = 1
+medioFact 1 = 1
+medioFact n = medioFact (n - 2) * n
+
+-- 6
+sumaDigitos :: Integer -> Integer
+sumaDigitos 0 = 0
+sumaDigitos n = sumaDigitos (n `div` 10) + (n `mod` 10)
 
 -- 7.
-todosDigitosIguales :: Integer -> Bool
-todosDigitosIguales n
-| n < 10 = True
-| 
+-- todosDigitosIguales :: Integer -> Bool
