@@ -1,4 +1,5 @@
---- exercise 1 ---
+-- exercise 1
+-- a.
 funcionF :: Int -> Int
 funcionF 1 = 8
 funcionF 4 = 131
@@ -15,17 +16,18 @@ funcionG 8 = 16
 funcionG 16 = 4
 funcionG 131 = 1
 
+-- c.
 funcionH :: Int -> Int
 funcionH n = funcionF (funcionG n)
 
 funcionK :: Int -> Int
 funcionK n = funcionG (funcionF n)
 
---- exercise 2 ---
+-- exercise 2
 {- a.
     problema absoluto (n: Z) : Z {
         requiere: {True}
-        asegura: {res = if n >= 0 then n else n * (-1)}
+        asegura: {res = |n|}
     }
 -}
 absoluto :: Int -> Int
@@ -50,7 +52,6 @@ maximoabsoluto x y
 {- c.
     problema maximo3 (x: Z, y: Z, z: Z) : Z {
         requiere: { True }
-        en los asegura hay lazy? es decir se indefine o tengo que especificar los casos
         asegura: {res = x -> x >= y ∧ x >= z ∨ res = y -> y > x ∧ y > z ∨ res = z -> z > x ∧ z > y)}
     }
 -}
@@ -71,6 +72,7 @@ algunoEs0 x y
   | x == 0 || y == 0 = True
   | otherwise = False
 
+algunoEs0' :: Float -> Float -> Bool
 algunoEs0' 0 y = True
 algunoEs0' x 0 = True
 algunoEs0' x y = False
@@ -105,56 +107,59 @@ mismoIntervalo x y
   | x <= 7 && x > 3 && y <= 7 && y > 3 = True
   | otherwise = False
 
-{- g.
+{- g. Si bien hay distintas posibles interpretaciones al problema, vamos a darle la siguiente:
+Cuando hay algun numero repetido no lo sumo.
     problema sumaDistintos (x: Z, y: Z,z : Z) : Z {
         requiere: { True }
-        asegura
-        {
-            (∃s: seq<X>)(x pertenece a s e y pertenece a s y z pertenece a s y noHayOtrosElem(s, x, y, z) y noHayRepetidos(s) res = sumatoria de i = 0 hasta |s|-1) de s[i]
-        }
+        asegura: {((x != y) ∧ (x != z) ∧ (y != z)) -> res = x + y + z}
+        asegura: {((x = y) ∧ (x != z)) -> res = z}
+        asegura: {((x != y) ∧ (x = z)) -> res = y}
+        asegura: {((x != y) ∧ (x != z) ∧ (y = z)) -> res = x}
+        asegura: {((x = y) ∧ (x = z)) -> res = 0}
 -}
 sumaDistintos :: Int -> Int -> Int -> Int
 sumaDistintos x y z
-  | x == y && x == z = x
-  | x == y = z + x
-  | x == z = y + x
-  | z == y = x + y
+  | x == y && x == z = 0
+  | x == y = z
+  | x == z = y
+  | z == y = x
   | otherwise = x + y + z
 
-{-
-problema esMultiploDe (x: Z, y: Z) : Bool {
+{- h.
+problema esMultiploDe (x: N, y: N) : Bool {
         la condicion de ser mayor estricto que 1 es porque 1 no es multiplo de nadie.
         requiere: { x >= y ∧ x > 1 ∧ y > 1 }
         asegura:
         {
-            result = true <-> (∃n:Z)(n * y = x)
+            res = true <-> (∃n:N)(n * y = x)
         }
 -}
 esMultiploDe :: Int -> Int -> Bool
 esMultiploDe x y = x `mod` y == 0
 
-{-
-problema digitoUnidades(n: Z) : Z {
-        requiere: { n > 0 }
-        asegura:
-        {
-            res = ultimoDigito(n)
-        }
+{- i.
+problema digitoUnidades(n: N) : N {
+        requiere: { True }
+        asegura:{res = ultimoDigito(n)}
 -}
 digitoUnidades :: Int -> Int
 digitoUnidades n = n `mod` 10
 
-{-
+{- j.
 problema digitoDecenas(n: Z) : Z {
         requiere: { n > 0 }
-        asegura:
-        {
-            res = anteUltimoDigito(n)
-        }
+        asegura:{res = anteUltimoDigito(n)}
 -}
 digitoDecenas :: Int -> Int
 digitoDecenas n = (n `div` 10) `mod` 10
 
+-- exercise 3
+estanRelacionados :: Int -> Int -> Bool
+estanRelacionados a b
+    | (a*a) `mod` (a*b) == 0 = True
+    | otherwise = False
+
+-- exercise 4
 -- 4f.
 
 {-
