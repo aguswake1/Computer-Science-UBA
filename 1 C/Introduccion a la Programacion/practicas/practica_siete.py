@@ -91,29 +91,19 @@ def es_bisiesto(anio: int) -> bool:
 # exercise 4
 # 1.
 def peso_pino(altura: int) -> int:
-    peso_final: int = 0
     altura_cm: int = altura * 100
-    # peso_hasta3: int = altura_cm * 3
-    # peso_mas3: int = altura_cm * 2
     if altura_cm <= 300:
-        peso_final += altura_cm * 3
+        return altura_cm * 3
     else:
-        peso_final += 300 * 3
-        altura_cm -= 300
-        peso_final += altura_cm * 2
-
-    return peso_final
-
-
-print(peso_pino(2))  # 1300kg
+        return 900 + 2 * (altura_cm - 300)
 
 
 # 2.
 def es_peso_util(peso: int) -> bool:
-    return 0
+    return 400 <= peso <= 1000
 
 
-# 3.y 4.
+# 3. y 4.
 def sirve_pino(altura: int) -> bool:
     return es_peso_util(peso_pino(altura))
 
