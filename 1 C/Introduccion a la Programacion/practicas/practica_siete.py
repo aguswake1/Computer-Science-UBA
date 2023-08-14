@@ -92,10 +92,10 @@ def es_bisiesto(anio: int) -> bool:
 # 1.
 def peso_pino(altura: int) -> int:
     altura_cm: int = altura * 100
-    if altura_cm <= 300:
-        return altura_cm * 3
-    else:
-        return 900 + 2 * (altura_cm - 300)
+    peso_hasta_300 = min(900, altura_cm * 3)
+    peso_mayor_300 = (altura_cm - 300) * 2
+    peso_estimado = peso_hasta_300 + max(0, peso_mayor_300)
+    return peso_estimado
 
 
 # 2.
@@ -108,4 +108,98 @@ def sirve_pino(altura: int) -> bool:
     return es_peso_util(peso_pino(altura))
 
 
-# exercise 5
+# exercise 5 FALTA ESPECIFICAR
+# 1.
+def devolver_el_doble_si_es_par(numero: int) -> int:
+    return numero * 2 if numero % 2 == 0 else numero
+
+
+# 2.
+def devolver_valor_si_es_par_sino_el_que_sigue(numero: int) -> int:
+    return numero if numero % 2 == 0 else numero + 1
+
+
+# 3.
+def devolver_el_doble_si_es_multiplo3_el_triple_si_es_multiplo9(
+    numero: int,
+) -> int:
+    if numero % 3 == 0:
+        return 2 * numero
+    elif numero % 9 == 0:
+        return 3 * numero
+    else:
+        return numero
+
+
+# 4.
+def longitud_nombre(nombre: str) -> str:
+    return (
+        "Tu nombre tiene muchas letras!"
+        if len(nombre) >= 5
+        else "Tu nombre tiene menos de 5 caracteres"
+    )
+
+
+# 5.
+def vacaciones_o_no(sexo: str, edad: int) -> None:
+    mujer_no_jubilada: bool = (18 <= edad < 60) and sexo.lower() == "f"
+    hombre_no_jubilado: bool = (18 <= edad < 65) and sexo.lower() == "m"
+    return (
+        print("Te toca trabajar")
+        if mujer_no_jubilada or hombre_no_jubilado
+        else print("Anda de vacaciones")
+    )
+
+
+# exercise 6
+# 1
+def uno_al_diez() -> None:
+    contador: int = 1
+    while contador <= 10:
+        print(contador)
+        contador += 1
+
+
+# 2.
+def pares() -> None:
+    contador: int = 10
+    while contador <= 40:
+        if contador % 2 == 0:
+            print(contador)
+        contador += 1
+
+
+# 3.
+def eco() -> None:
+    contador: int = 1
+    while contador <= 10:
+        print("eco")
+        contador += 1
+
+
+# 4.
+def despegue_cohete(cuenta_regresiva: int) -> None:
+    contador: int = cuenta_regresiva
+    while contador >= 1:
+        print(contador)
+        contador -= 1
+    print("Despegue")
+
+
+# 5.
+def viaje_en_el_tiempo(anio_partida: int, anio_del_pasado: int) -> None:
+    while anio_partida > anio_del_pasado:
+        anio_partida -= 1
+        print(
+            f"Ha viajado un anio al pasado, estamos en el anio {anio_partida}"
+        )
+
+
+# 6.
+def viaje_en_el_tiempo_aristoteles(anio_partida: int) -> None:
+    while anio_partida > -364:
+        anio_partida -= 20
+        print(
+            "Ha viajado veinte anios al pasado, estamos en el anio"
+            f" {anio_partida}"
+        )
