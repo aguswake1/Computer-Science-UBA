@@ -156,34 +156,46 @@ digitoDecenas n = (n `div` 10) `mod` 10
 -- exercise 3
 estanRelacionados :: Int -> Int -> Bool
 estanRelacionados a b
-    | (a*a) `mod` (a*b) == 0 = True
-    | otherwise = False
+  | (a * a) `mod` (a * b) == 0 = True
+  | otherwise = False
 
--- exercise 4
+-- exercise 4 faltan especificaciones
+-- a.
 prodInt :: (Int, Int) -> (Int, Int) -> (Int, Int)
 prodInt (x1, y1) (x2, y2) = (x1 * x2, y1 * y2)
 
 
+-- b.
 todoMenor :: (Int, Int) -> (Int, Int) -> Bool
 todoMenor (x1, y1) (x2, y2)
-    | x1 < x2 && y1 < y2 = True
-    | otherwise = False
+  | x1 < x2 && y1 < y2 = True
+  | otherwise = False
 
 
+-- c.
 distanciaPuntos :: (Float, Float) -> (Float, Float) -> Float
-distanciaPuntos (x1, y1) (x2, y2) = sqrt ((x1-x2)**2 + (y1-y2)**2)
+distanciaPuntos (x1, y1) (x2, y2) = sqrt ((x1 - x2) ** 2 + (y1 - y2) ** 2)
 
 
+-- d.
 sumaTerna :: (Int, Int, Int) -> Int
 sumaTerna (x, y, z) = x + y + z
 
 
+-- e.
 sumarSoloMultiplos :: (Int, Int, Int) -> Int -> Int
 sumarSoloMultiplos (x, y, z) num
-    | x `mod` num == 0 && y `mod` num == 0 && z `mod` num == 0 = x + y + z
-    | otherwise = 0
--- 4f.
+  | x `mod` num == 0 && y `mod` num == 0 && z `mod` num == 0 = x + y + z
+  | x `mod` num == 0 && y `mod` num == 0 = x + y
+  | x `mod` num == 0 && z `mod` num == 0 = x + z
+  | y `mod` num == 0 && z `mod` num == 0 = y + z
+  | x `mod` num == 0 = x
+  | y `mod` num == 0 = y
+  | z `mod` num == 0 = z
+  | otherwise = 0
 
+
+-- f.
 {-
 En la especificacion todo ocurre de manera simultanea, no sistematica.
 
@@ -208,3 +220,54 @@ posPrimerPar (n1, n2, n3)
   | even n2 = 2
   | even n3 = 3
   | otherwise = 4
+
+
+-- g.
+crearPar :: a -> b -> (a, b)
+crearPar x y = (x, y)
+
+
+-- h.
+invertir :: (a, b) -> (b, a)
+invertir (x, y) = (y, x)
+
+
+-- exercise 5
+todosMenores :: (Int, Int, Int) -> Bool
+todosMenores (n1, n2, n3)
+  | auxF n1 > auxG n1 && auxF n2 > auxG n2 && auxF n3 > auxG n3 = True
+  | otherwise = False
+
+
+auxF :: Int -> Int
+auxF n
+  | n <= 7 = n ^ 2
+  | otherwise = 2 * n - 1
+
+
+auxG :: Int -> Int
+auxG n
+  | even n = n `div` 2
+  | otherwise = 3 * n + 1
+
+
+-- exercise 6
+bisiesto :: Int -> Bool
+bisiesto anio = not (anio `mod` 4 /= 0 || (anio `mod` 100 == 0 && anio `mod` 400 /= 0))
+
+
+-- exercise 7
+distanciaManhattan :: (Float, Float, Float) -> (Float, Float, Float) -> Float
+distanciaManhattan (x1, y1, z1) (x2, y2, z2) = abs ((x1 - x2) + (y1 - y2) + (z1 - z2))
+
+
+-- exercise 8
+comparar :: Int -> Int -> Int
+comparar a b
+  | sumaUltimosDosDigitos a  < sumaUltimosDosDigitos b = 1
+  | sumaUltimosDosDigitos a  > sumaUltimosDosDigitos b = -1
+  | otherwise = 0
+
+
+sumaUltimosDosDigitos :: Int -> Int
+sumaUltimosDosDigitos n = digitoUnidades n + digitoDecenas n
