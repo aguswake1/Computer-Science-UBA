@@ -160,6 +160,28 @@ estanRelacionados a b
     | otherwise = False
 
 -- exercise 4
+prodInt :: (Int, Int) -> (Int, Int) -> (Int, Int)
+prodInt (x1, y1) (x2, y2) = (x1 * x2, y1 * y2)
+
+
+todoMenor :: (Int, Int) -> (Int, Int) -> Bool
+todoMenor (x1, y1) (x2, y2)
+    | x1 < x2 && y1 < y2 = True
+    | otherwise = False
+
+
+distanciaPuntos :: (Float, Float) -> (Float, Float) -> Float
+distanciaPuntos (x1, y1) (x2, y2) = sqrt ((x1-x2)**2 + (y1-y2)**2)
+
+
+sumaTerna :: (Int, Int, Int) -> Int
+sumaTerna (x, y, z) = x + y + z
+
+
+sumarSoloMultiplos :: (Int, Int, Int) -> Int -> Int
+sumarSoloMultiplos (x, y, z) num
+    | x `mod` num == 0 && y `mod` num == 0 && z `mod` num == 0 = x + y + z
+    | otherwise = 0
 -- 4f.
 
 {-
