@@ -126,29 +126,26 @@ sumaDistintos x y z
   | otherwise = x + y + z
 
 {- h.
-problema esMultiploDe (x: N, y: N) : Bool {
+problema esMultiploDe (x: Z, y: Z) : Bool {
         la condicion de ser mayor estricto que 1 es porque 1 no es multiplo de nadie.
-        requiere: { x >= y ∧ x > 1 ∧ y > 1 }
-        asegura:
-        {
-            res = true <-> (∃n:N)(n * y = x)
-        }
+  requiere: { x >= y ∧ x > 1 ∧ y > 1 }
+  asegura: { res = true <-> (∃n:N)(n * y = x) }
 -}
 esMultiploDe :: Int -> Int -> Bool
 esMultiploDe x y = x `mod` y == 0
 
 {- i.
 problema digitoUnidades(n: N) : N {
-        requiere: { True }
-        asegura:{res = ultimoDigito(n)}
+  requiere: { True }
+  asegura:{res = ultimoDigito(n)}
 -}
 digitoUnidades :: Int -> Int
 digitoUnidades n = n `mod` 10
 
 {- j.
 problema digitoDecenas(n: Z) : Z {
-        requiere: { n > 0 }
-        asegura:{res = anteUltimoDigito(n)}
+  requiere: { n > 0 }
+  asegura:{res = anteUltimoDigito(n)}
 -}
 digitoDecenas :: Int -> Int
 digitoDecenas n = (n `div` 10) `mod` 10
@@ -258,16 +255,72 @@ bisiesto anio = not (anio `mod` 4 /= 0 || (anio `mod` 100 == 0 && anio `mod` 400
 
 -- exercise 7
 distanciaManhattan :: (Float, Float, Float) -> (Float, Float, Float) -> Float
-distanciaManhattan (x1, y1, z1) (x2, y2, z2) = abs ((x1 - x2) + (y1 - y2) + (z1 - z2))
+distanciaManhattan (x1, y1, z1) (x2, y2, z2) = abs (x1 - x2 + y1 - y2 + z1 - z2)
 
 
 -- exercise 8
 comparar :: Int -> Int -> Int
 comparar a b
-  | sumaUltimosDosDigitos a  < sumaUltimosDosDigitos b = 1
-  | sumaUltimosDosDigitos a  > sumaUltimosDosDigitos b = -1
+  | sumaUltimosDosDigitos a < sumaUltimosDosDigitos b = 1
+  | sumaUltimosDosDigitos a > sumaUltimosDosDigitos b = -1
   | otherwise = 0
+  where sumaUltimosDosDigitos n = digitoUnidades n + digitoDecenas n
 
 
-sumaUltimosDosDigitos :: Int -> Int
-sumaUltimosDosDigitos n = digitoUnidades n + digitoDecenas n
+{- exercise 9
+
+
+a.
+Si n es igual a 0, retorna 1, de otra manera retorna 0.
+
+problema f1(n: ℝ): ℝ {
+  requiere: { True }
+  asegura: { res = 1 <-> n == 0 or res = 0 <-> n != 0 }
+}
+
+
+b.
+Si n es igual a 1, retorna 15, si n es igual a -1 retorna -15.
+
+problema f2(n: ℝ): ℝ {
+  requiere: { n == 1 or n == -1 }
+  asegura: { res = 15 <-> n == 1 or res = -15 <-> n == -1 }
+}
+
+
+c.
+Si n es menor o igual que 9, retorna 7, si n mayor o igual a 3, retorna 5.
+
+problema f3(n: ℝ): ℝ {
+  requiere: { True }
+  asegura: { res = 7 <-> n <= 9 or res = 5 <-> n > 9 }
+}
+
+
+d.
+Saca el promedio de x e y.
+
+problema f4(x: ℝ, y: ℝ): ℝ {
+  requiere: { True }
+  asegura: { res = (x + y) / 2 }
+}
+
+
+e.
+Saca el promedio entre la coordenada x y la coordenada y de la tupla.
+
+problema f5(p: ℝ X ℝ): ℝ {
+  requiere: { True }
+  asegura: { res = (p0 + p1) / 2 }
+}
+
+
+f.
+Dados dos numeros, retorna el valor de verdad al truncar el primer numero y compararlo con el segundo
+
+problema f6(a: ℝ, b: Z): Bool {
+  requiere: { True }
+  asegura: { res = truncar(a) == b }
+}
+
+-}
