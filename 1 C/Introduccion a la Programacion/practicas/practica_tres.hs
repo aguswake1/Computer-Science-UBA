@@ -171,7 +171,7 @@ todoMenor (x1, y1) (x2, y2)
 
 -- c.
 distanciaPuntos :: (Float, Float) -> (Float, Float) -> Float
-distanciaPuntos (x1, y1) (x2, y2) = sqrt ((x1 - x2) ** 2 + (y1 - y2) ** 2)
+distanciaPuntos t1 t2 = sqrt ((fst t1 - fst t2) ** 2 + (snd t1 - snd t2) ** 2)
 
 
 -- d.
