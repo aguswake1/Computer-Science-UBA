@@ -108,9 +108,40 @@ e = eAprox 10
 
 
 -- exercise  12.
+sucesion :: Integer -> Float
+sucesion 1 = 2
+sucesion n = 2 + 1 / sucesion (n - 1)
+
+raizDe2Aprox :: Integer -> Float
+raizDe2Aprox n = sucesion n - 1
+
+
 -- exercise  13.
+fn :: Integer -> Integer -> Integer
+fn 1 m = fm 1 m
+fn n m = fm n m + fn (n - 1) m
+
+fm :: Integer -> Integer -> Integer
+fm n 1 = n
+fm n m = n^m + fm n (m - 1)
+
+
 -- exercise  14.
+sumaPotenciasn :: Integer -> Integer -> Integer -> Integer
+sumaPotenciasn q 1 m = sumaPotenciasAuxm q 1 m
+sumaPotenciasn q n m = sumaPotenciasAuxm q n m + sumaPotenciasn q (n - 1) m
+
+sumaPotenciasAuxm :: Integer -> Integer -> Integer -> Integer
+sumaPotenciasAuxm q n 1 = q^(n + 1)
+sumaPotenciasAuxm q n m = q^(n + m) + sumaPotenciasAuxm q n (m - 1)
+
+
 -- exercise  15.
+--sumaRacionales :: Integer -> Integer -> Float
+--sumaRacionales 1 1 = 0
+
+
+
 -- exercise  16.
 -- exercise  17.
 -- exercise  18.
