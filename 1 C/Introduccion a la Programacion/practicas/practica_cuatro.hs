@@ -13,8 +13,8 @@ parteEntera n
 
 -- exercise 3.
 esDivisible :: Integer -> Integer -> Bool
-esDivisible 0 n2 = True
-esDivisible 1 n2 = False
+esDivisible 0 _ = True
+esDivisible 1 _ = False
 esDivisible n1 n2 = esDivisible (n1 - n2) n2
 
 -- exercise 4
@@ -137,12 +137,18 @@ sumaPotenciasAuxm q n m = q^(n + m) + sumaPotenciasAuxm q n (m - 1)
 
 
 -- exercise  15.
---sumaRacionales :: Integer -> Integer -> Float
---sumaRacionales 1 1 = 0
+sumaRacionalesn :: Integer -> Integer -> Float
+sumaRacionalesn 1 m = sumaRacionalesm 1 m
+sumaRacionalesn n m = sumaRacionalesm n m + sumaRacionalesn (n - 1) m
 
+sumaRacionalesm :: Integer -> Integer -> Float
+sumaRacionalesm n 1 = 1.0 / fromIntegral n
+sumaRacionalesm n m = fromIntegral m / fromIntegral n + sumaRacionalesm n (m - 1)
 
 
 -- exercise  16.
+-- a)
+menorDivisor :: Integer -> Integer
 -- exercise  17.
 -- exercise  18.
 -- exercise  19.
