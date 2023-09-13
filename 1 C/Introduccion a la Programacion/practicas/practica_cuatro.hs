@@ -4,6 +4,7 @@ fibonacci 0 = 0
 fibonacci 1 = 1
 fibonacci n = fibonacci (n - 1) + fibonacci (n - 2)
 
+
 -- exercise 2.
 parteEntera :: Float -> Integer
 parteEntera n
@@ -11,16 +12,19 @@ parteEntera n
   | n >= 1 = 1 + parteEntera (n - 1) + 1
   | n <= -1 = -1 + parteEntera (n + 1)
 
+
 -- exercise 3.
 esDivisible :: Integer -> Integer -> Bool
 esDivisible 0 _ = True
 esDivisible 1 _ = False
 esDivisible n1 n2 = esDivisible (n1 - n2) n2
 
+
 -- exercise 4
 sumaImpares :: Integer -> Integer
 sumaImpares 0 = 0
 sumaImpares n = (2 * n - 1) + sumaImpares (n - 1)
+
 
 -- exercise 5
 medioFact :: Integer -> Integer
@@ -28,10 +32,12 @@ medioFact 0 = 1
 medioFact 1 = 1
 medioFact n = n * medioFact (n - 2)
 
+
 -- exercise 6
 sumaDigitos :: Integer -> Integer
 sumaDigitos 0 = 0
 sumaDigitos n =  (n `mod` 10) + sumaDigitos (n `div` 10)
+
 
 -- exercise  7.
 todosDigitosIguales :: Integer -> Bool

@@ -29,18 +29,25 @@ pertenece :: (Eq t) => t -> [t] -> Bool
 pertenece _ [] = False
 pertenece n (x:xs)
     | x == n = True
-    | otherwise = pertenece n xs
+    | otherwise = n `pertenece` xs
 
 
 -- 2.
 todosIguales :: (Eq t) => [t] -> Bool
-todosIguales (x:y:xs)
-    | x == todosIguales xs = True
-    |otherwise = False
+todosIguales [] = True
+todosIguales [x] = True
+todosIguales (x:xs)
+    | x == head xs = todosIguales xs
+    | otherwise = False
 
 
 -- 3.
---todosDistintos :: (Eq t) => [t] -> Bool
+todosDistintos :: (Eq t) => [t] -> Bool
+todosDistintos [] = True
+todosDistintos [x] = True
+todosDistintos (x:xs)
+    | x `pertenece` xs = False
+    | otherwise =  todosDistintos xs
 
 
 -- 4.
@@ -52,12 +59,35 @@ hayRepetidos (x:xs)
 
 
 -- 5.
-{-
 quitar :: (Eq t) => t -> [t] -> [t]
-quitar _ [] = 0
-quitar num x:xs
-    | num == x
--}
+quitar _ [] = []
+quitar el (x:xs)
+    | not (el `pertenece` (x:xs)) = x:xs
+    | el == x = xs
+    | otherwise = x : quitar el xs
+
+
+-- 6.
+quitarTodos :: (Eq t ) => t -> [t] -> [t]
+quitarTodos _ [] = []
+quitarTodos el (x:xs)
+    | noPertenece = x:xs
+    | el == x && noPertenece = xs
+    | el == x = quitarTodos el xs
+    | otherwise = x : quitarTodos el xs
+    where noPertenece = not (el `pertenece` (x:xs))
+
+-- 7.
+--eliminarRepetidos :: (Eq t) => [t] -> [t]
+
+
+-- 8.
+--mismosElementos :: (Eq t) => [t] -> [t] -> Bool
+
+
+-- 9.
+--capicua :: (Eq t) => [t] -> Bool
+
 
 -- exercise 3
 -- 1.
