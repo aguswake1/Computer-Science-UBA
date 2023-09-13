@@ -61,29 +61,37 @@ hayRepetidos (x:xs)
 -- 5.
 quitar :: (Eq t) => t -> [t] -> [t]
 quitar _ [] = []
-quitar el (x:xs)
-    | not (el `pertenece` (x:xs)) = x:xs
-    | el == x = xs
-    | otherwise = x : quitar el xs
+quitar x (y:xs)
+    | x == y = xs
+    | otherwise = y : quitar x xs
 
 
 -- 6.
 quitarTodos :: (Eq t ) => t -> [t] -> [t]
 quitarTodos _ [] = []
-quitarTodos el (x:xs)
-    | noPertenece = x:xs
-    | el == x && noPertenece = xs
-    | el == x = quitarTodos el xs
-    | otherwise = x : quitarTodos el xs
-    where noPertenece = not (el `pertenece` (x:xs))
+quitarTodos x (y:xs)
+    | x == y && noPertenece = xs
+    | x == y = quitarTodos x xs
+    | otherwise = y : quitarTodos x xs
+    where noPertenece = not (x `pertenece` (y:xs))
+
 
 -- 7.
---eliminarRepetidos :: (Eq t) => [t] -> [t]
+eliminarRepetidos :: (Eq t) => [t] -> [t]
+eliminarRepetidos [] = []
+eliminarRepetidos (x:xs)
+    | x `pertenece` xs = x : eliminarRepetidos (quitarTodos x xs)
+    | otherwise = x : eliminarRepetidos xs
 
 
 -- 8.
---mismosElementos :: (Eq t) => [t] -> [t] -> Bool
-
+mismosElementos :: (Eq t) => [t] -> [t] -> Bool
+mismosElementos [] [] = True
+mismosElementos [] _ = False
+mismosElementos _ [] = False
+mismosElementos (x:xs) ys
+    | x `pertenece` ys = mismosElementos (quitarTodos x xs) (quitarTodos x ys)
+    | otherwise = False
 
 -- 9.
 --capicua :: (Eq t) => [t] -> Bool
@@ -114,23 +122,47 @@ maximo (x:xs)
 
 -- 4.
 --sumarN :: Integer -> [Integer] -> [Integer]
---sumarN n x:xs =
+
+
+-- 5.
+--sumarElPrimero :: [Integer] -> [Integer]
+
+
+-- 6.
+--sumarElUltimo :: [Integer] -> [Integer]
+
+
+-- 7.
+--pares :: [Integer] -> [Integer]
+
+
+-- 8.
+--multiplosDeN :: Integer -> [Integer] -> [Integer]
 
 
 -- 9.
 ordenar :: [Integer] -> [Integer]
 ordenar [x] = [x]
-ordenar s = maximo s : ordenar (eliminar (maximo s) s)
-
-
-eliminar :: Integer -> [Integer] -> [Integer]
-eliminar _ [] = []
-eliminar x (y:ys)
-    | x == y = ys
-    | otherwise = y:eliminar x ys
+ordenar s = maximo s : ordenar (quitar (maximo s) s)
 
 
 -- exercise 4
+-- 1.
+--sacarBlancosRepetidos :: [Char] -> [Char]
+
+
+-- 2.
+--contarPalabras :: [Char] -> Integer
+
+
+-- 3.
+--palabras :: [Char] -> [[Char]]
+
+
+-- 4.
+--palabraMasLarga :: [Char] -> [Char]
+
+
 -- 5.
 {-
 aplanar :: [[Char]] -> [Char]
@@ -138,7 +170,21 @@ aplanar [x] = [x]
 aplanar (x:xs) = x ++ aplanar xs
 -}
 
+
+-- 6.
+--aplanarConBlancos :: [[Char]] -> [Char]
+
+
+-- 7.
+--aplanarConNBlancos :: [[Char]] -> Integer -> [Char]
+
+
 -- exercise 5
+-- 1.
+--sumaAcumulada :: (Num t) => [t] -> [t]
+
+
+
 -- 2.
 --descomponerEnPrimos :: [Integer] -> [[Integer]]
 -- dp [x] = descomposicion [x]
