@@ -19,6 +19,7 @@ principio (el:xs) = el : principio xs
 
 -- 4.
 reverso :: [t] -> [t]
+reverso [] = []
 reverso [el] = [el]
 reverso (el:xs) = reverso xs ++ [el]
 
@@ -93,8 +94,10 @@ mismosElementos (x:xs) ys
     | x `pertenece` ys = mismosElementos (quitarTodos x xs) (quitarTodos x ys)
     | otherwise = False
 
+
 -- 9.
---capicua :: (Eq t) => [t] -> Bool
+capicua :: (Eq t) => [t] -> Bool
+capicua s = s == reverso s
 
 
 -- exercise 3
@@ -121,23 +124,36 @@ maximo (x:xs)
 
 
 -- 4.
---sumarN :: Integer -> [Integer] -> [Integer]
+sumarN :: Integer -> [Integer] -> [Integer]
+sumarN n [] = []
+sumarN n [x] = [n + x]
+sumarN n (x:xs) = (n + x) : sumarN n xs
 
 
 -- 5.
---sumarElPrimero :: [Integer] -> [Integer]
+sumarElPrimero :: [Integer] -> [Integer]
+sumarElPrimero (x:xs) = sumarN x (x:xs)
 
 
 -- 6.
---sumarElUltimo :: [Integer] -> [Integer]
+sumarElUltimo :: [Integer] -> [Integer]
+sumarElUltimo s = sumarN (head (reverso s)) s
 
 
 -- 7.
---pares :: [Integer] -> [Integer]
+pares :: [Integer] -> [Integer]
+pares [] = []
+pares (x:xs)
+    | even x = x : pares xs
+    | otherwise = pares xs
 
 
 -- 8.
---multiplosDeN :: Integer -> [Integer] -> [Integer]
+multiplosDeN :: Integer -> [Integer] -> [Integer]
+multiplosDeN _ [] = []
+multiplosDeN n (x:xs)
+    | n `mod` x == 0 = x : multiplosDeN n xs
+    | otherwise = multiplosDeN n xs
 
 
 -- 9.
