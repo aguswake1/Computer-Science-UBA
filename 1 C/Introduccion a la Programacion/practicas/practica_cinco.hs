@@ -164,11 +164,35 @@ ordenar s = maximo s : ordenar (quitar (maximo s) s)
 
 -- exercise 4
 -- 1.
---sacarBlancosRepetidos :: [Char] -> [Char]
+sacarBlancosRepetidos :: [Char] -> [Char]
+sacarBlancosRepetidos [x] = [x]
+sacarBlancosRepetidos (' ':' ':xs) = sacarBlancosRepetidos (' ':xs)
+sacarBlancosRepetidos (x:y:xs) = x : sacarBlancosRepetidos (y:xs)
 
 
 -- 2.
---contarPalabras :: [Char] -> Integer
+contarPalabras :: [Char] -> Int
+contarPalabras [] = 0
+contarPalabras xs = contarEspacios (quitarEspaciosIniFin (sacarBlancosRepetidos xs)) + 1
+
+quitarEspaciosIniFin :: [Char] -> [Char]
+quitarEspaciosIniFin [] = []
+quitarEspaciosIniFin (x:xs)
+    | x ==' ' && head (reverse xs) == ' ' = quitarUltimo xs
+    | x ==' ' = xs
+    | head (reverse xs)==' ' = quitarUltimo (x:xs)
+    | otherwise = x:xs
+
+contarEspacios :: [Char] -> Int
+contarEspacios [] = 0
+contarEspacios (x:xs)
+    | x == ' '= 1 + contarEspacios xs
+    | otherwise = contarEspacios xs
+
+quitarUltimo :: [Char] -> [Char]
+quitarUltimo [] = []
+quitarUltimo [x] = []
+quitarUltimo (x:xs) = x : quitarUltimo xs
 
 
 -- 3.
