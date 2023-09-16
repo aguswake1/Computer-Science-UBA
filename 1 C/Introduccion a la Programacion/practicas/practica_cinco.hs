@@ -165,6 +165,7 @@ ordenar s = maximo s : ordenar (quitar (maximo s) s)
 -- exercise 4
 -- 1.
 sacarBlancosRepetidos :: [Char] -> [Char]
+sacarBlancosRepetidos [] = []
 sacarBlancosRepetidos [x] = [x]
 sacarBlancosRepetidos (' ':' ':xs) = sacarBlancosRepetidos (' ':xs)
 sacarBlancosRepetidos (x:y:xs) = x : sacarBlancosRepetidos (y:xs)
@@ -178,46 +179,69 @@ contarPalabras xs = contarEspacios (quitarEspaciosIniFin (sacarBlancosRepetidos 
 quitarEspaciosIniFin :: [Char] -> [Char]
 quitarEspaciosIniFin [] = []
 quitarEspaciosIniFin (x:xs)
-    | x ==' ' && head (reverse xs) == ' ' = quitarUltimo xs
-    | x ==' ' = xs
-    | head (reverse xs)==' ' = quitarUltimo (x:xs)
+    | x == ' ' && head (reverse xs) == ' ' = quitarUltimo xs
+    | head (reverse xs) == ' ' = quitarUltimo (x:xs)
+    | x == ' ' = xs
     | otherwise = x:xs
-
-contarEspacios :: [Char] -> Int
-contarEspacios [] = 0
-contarEspacios (x:xs)
-    | x == ' '= 1 + contarEspacios xs
-    | otherwise = contarEspacios xs
 
 quitarUltimo :: [Char] -> [Char]
 quitarUltimo [] = []
 quitarUltimo [x] = []
 quitarUltimo (x:xs) = x : quitarUltimo xs
 
+contarEspacios :: [Char] -> Int
+contarEspacios [] = 0
+contarEspacios (' ':xs) = 1 + contarEspacios xs
+contarEspacios (x:xs) = contarEspacios xs
+
 
 -- 3.
---palabras :: [Char] -> [[Char]]
+palabras :: [Char] -> [[Char]]
+palabras xs = palabrasAux (quitarEspaciosIniFin (sacarBlancosRepetidos xs))
+
+palabrasAux :: [Char] -> [[Char]]
+palabrasAux [] = []
+palabrasAux (x:xs) = primeraPalabra (x:xs) : palabrasAux (borrarPrimeraPalabra (x:xs))
+
+primeraPalabra :: [Char] -> [Char]
+primeraPalabra [] = []
+primeraPalabra (' ':xs) = []
+primeraPalabra (x:xs) = x : primeraPalabra xs
+
+borrarPrimeraPalabra :: [Char] -> [Char]
+borrarPrimeraPalabra [] = []
+borrarPrimeraPalabra (' ':xs) = xs
+borrarPrimeraPalabra (x:xs) = borrarPrimeraPalabra xs
 
 
 -- 4.
---palabraMasLarga :: [Char] -> [Char]
+palabraMasLarga :: [Char] -> [Char]
+palabraMasLarga s = palabraMasLargaAux (palabras s)
+
+palabraMasLargaAux :: [[Char]] -> [Char]
+palabraMasLargaAux [] = []
+palabraMasLargaAux (x:xs)
+    | length x > length (palabraMasLargaAux xs) = x
+    | otherwise = palabraMasLargaAux xs
 
 
 -- 5.
-{-
 aplanar :: [[Char]] -> [Char]
-aplanar [x] = [x]
-aplanar (x:xs) = x ++ aplanar xs
--}
+aplanar [] = []
+aplanar (xs:xss) = xs ++ aplanar xss
 
 
 -- 6.
---aplanarConBlancos :: [[Char]] -> [Char]
+aplanarConBlancos :: [[Char]] -> [Char]
+aplanarConBlancos [] = []
+aplanarConBlancos (xs:xss) = xs ++ " " ++ aplanar xss
 
 
 -- 7.
 --aplanarConNBlancos :: [[Char]] -> Integer -> [Char]
-
+--aplanarConNBlancos [] = []
+--aplanarConNBlancos _ 0 = aplanarConNBlancos xss _
+--aplanarConNBlancos (xs:xss) _ = xs ++ " " ++ aplanar xss
 
 -- exercise 5
 -- 1.
