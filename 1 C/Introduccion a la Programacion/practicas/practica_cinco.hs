@@ -248,7 +248,7 @@ nBlancos n = " " ++ nBlancos (n - 1)
 
 -- exercise 5
 -- 1.
-sumaAcumulada :: (Num t) => [t] -> [t] -- [1,2,3,4,5]  ->  [1,3,6,10,15]
+sumaAcumulada :: (Num t) => [t] -> [t]
 sumaAcumulada [] = []
 sumaAcumulada s = sumaAcumulada (sumaQuitarUltimoElem s) ++ [sumaConAnteriores s]
 
@@ -262,20 +262,27 @@ sumaQuitarUltimoElem [x] = []
 sumaQuitarUltimoElem (x:xs) = x : sumaQuitarUltimoElem xs
 
 
--- 2. fotos
---descomponerEnPrimos :: [Integer] -> [[Integer]]
--- dp [x] = descomposicion [x]
--- descomposicion x : descomponerENprimos xs
-{-
-esPrimo :: Integer -> Bool
-esPrimo n = cantDivisoresHasta n n
--}
-cantDivisoresHasta :: Integer -> Integer -> Integer
-cantDivisoresHasta n 1 = 1
-cantDivisoresHasta n k
-    | n `mod` k == 0 = 1 + cantDivisoresHasta n k-1
-    | otherwise = cantDivisoresHasta n k-1
+-- 2.
+descomponerEnPrimos :: [Integer] -> [[Integer]]
+descomponerEnPrimos [] = []
+descomponerEnPrimos (x:xs) = descomposicion x : descomponerEnPrimos xs
 
 descomposicion :: Integer -> [Integer]
 descomposicion n
-    | even n =  []
+    | esPrimo n = [n]
+    | otherwise = menorDivisorDesde n 2 : descomposicion (n `div` menorDivisorDesde n 2)
+
+menorDivisorDesde :: Integer -> Integer -> Integer
+menorDivisorDesde n y
+    | n `mod` y == 0 = y
+    | otherwise = menorDivisorDesde n (y + 1)
+
+esPrimo :: Integer -> Bool
+esPrimo n = cantDivisoresHasta n n == 2
+
+cantDivisoresHasta :: Integer -> Integer -> Integer
+cantDivisoresHasta _ 1 = 1
+cantDivisoresHasta n k
+    | n `mod` k == 0 = 1 + cantDivisoresHasta n (k - 1)
+    | otherwise = cantDivisoresHasta n (k - 1)
+
