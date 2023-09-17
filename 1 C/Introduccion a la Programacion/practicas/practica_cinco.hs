@@ -238,18 +238,31 @@ aplanarConBlancos (xs:xss) = xs ++ " " ++ aplanar xss
 
 
 -- 7.
---aplanarConNBlancos :: [[Char]] -> Integer -> [Char]
---aplanarConNBlancos [] = []
---aplanarConNBlancos _ 0 = aplanarConNBlancos xss _
---aplanarConNBlancos (xs:xss) _ = xs ++ " " ++ aplanar xss
+aplanarConNBlancos :: [[Char]] -> Integer -> [Char]
+aplanarConNBlancos [] _ = []
+aplanarConNBlancos (xs:xss) n = xs ++ nBlancos n ++ aplanar xss
+
+nBlancos :: Integer -> [Char]
+nBlancos 0 = ""
+nBlancos n = " " ++ nBlancos (n - 1)
 
 -- exercise 5
 -- 1.
---sumaAcumulada :: (Num t) => [t] -> [t]
+sumaAcumulada :: (Num t) => [t] -> [t] -- [1,2,3,4,5]  ->  [1,3,6,10,15]
+sumaAcumulada [] = []
+sumaAcumulada s = sumaAcumulada (sumaQuitarUltimoElem s) ++ [sumaConAnteriores s]
+
+sumaConAnteriores :: (Num t) => [t] -> t
+sumaConAnteriores [] = 0
+sumaConAnteriores (x:xs) = x + sumaConAnteriores xs
+
+sumaQuitarUltimoElem :: [t] -> [t]
+sumaQuitarUltimoElem [] = []
+sumaQuitarUltimoElem [x] = []
+sumaQuitarUltimoElem (x:xs) = x : sumaQuitarUltimoElem xs
 
 
-
--- 2.
+-- 2. fotos
 --descomponerEnPrimos :: [Integer] -> [[Integer]]
 -- dp [x] = descomposicion [x]
 -- descomposicion x : descomponerENprimos xs
