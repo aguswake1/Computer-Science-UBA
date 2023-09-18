@@ -155,10 +155,56 @@ sumaRacionalesm n m = fromIntegral m / fromIntegral n + sumaRacionalesm n (m - 1
 -- exercise  16.
 -- a)
 menorDivisor :: Integer -> Integer
+menorDivisor n = menorDivisorAux n 2
+
+menorDivisorAux :: Integer -> Integer -> Integer
+menorDivisorAux n k
+  | n `mod` k == 0 = k
+  |otherwise = menorDivisorAux n (k + 1)
+
+
+-- b)
+esPrimo :: Integer -> Bool
+esPrimo n = menorDivisor n == n
+
+
+-- c)
+--sonCoprimos :: Integer -> Integer -> Bool
+
+mcdEuclides :: Integer -> Integer -> Integer
+mcdEuclides a 0 = a -- Si b es 0, el MCD es a
+mcdEuclides a b = mcdEuclides b (a `mod` b) -- Caso recursivo
+
+-- d)
+--nEsimoPrimo :: Integer -> Integer
+--nEsimoPrimo 1 = 2
+--nEsimoPrimo n = nEsimoPrimo (n - 1)
+
+
+
 -- exercise  17.
+--esFibonacci :: Integer -> Bool
+
+
 -- exercise  18.
+mayorDigitoPar :: Integer -> Integer
+mayorDigitoPar 0 = -1
+mayorDigitoPar n
+  | n < 10 && even n = n
+  | odd (n `mod` 10) = mayorDigitoPar (n `div` 10)
+  | (n `mod` 10) > mayorDigitoPar (n `div` 10) = n `mod` 10
+  | otherwise = mayorDigitoPar (n `div` 10)
+
+
 -- exercise  19.
+--esSumaInicialDePrimos :: Int -> Bool
+
+
 -- exercise  20.
+--tomaValorMax :: Int -> Int -> Int
+
+
 -- exercise  21.
+--pitagoras :: Integer -> Integer -> Integer -> Integer
 
 
