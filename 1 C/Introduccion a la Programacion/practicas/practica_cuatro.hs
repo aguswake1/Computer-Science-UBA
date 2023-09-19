@@ -1,3 +1,4 @@
+import GHC (n2l)
 -- exercise 1.
 fibonacci :: Integer -> Integer
 fibonacci 0 = 0
@@ -169,12 +170,24 @@ esPrimo n = menorDivisor n == n
 
 
 -- c)
---sonCoprimos :: Integer -> Integer -> Bool
+-- el Algoritmo de euclides es mas eficiente, no esta implementado, esta hecho de forma manual
+sonCoprimos :: Integer -> Integer -> Bool
+sonCoprimos n1 n2 = sonCoprimosAux n1 n2 (menor n1 n2)
 
+sonCoprimosAux :: Integer -> Integer -> Integer -> Bool
+sonCoprimosAux _ _ 1 = True
+sonCoprimosAux n1 n2 menor = (n1 `mod` menor /= 0 || n2 `mod` menor  /= 0) && sonCoprimosAux n1 n2 (menor - 1)
+
+menor :: Integer -> Integer -> Integer
+menor n1 n2
+  | n1 < n2 = n1
+  | otherwise = n2
+
+{-
 mcdEuclides :: Integer -> Integer -> Integer
 mcdEuclides a 0 = a -- Si b es 0, el MCD es a
 mcdEuclides a b = mcdEuclides b (a `mod` b) -- Caso recursivo
-
+-}
 -- d)
 --nEsimoPrimo :: Integer -> Integer
 --nEsimoPrimo 1 = 2
