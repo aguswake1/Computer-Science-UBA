@@ -112,5 +112,5 @@ division a b = fromIntegral a / fromIntegral b
 vallaMenosVencida :: [(String, String)] -> [Int] -> String
 vallaMenosVencida [(x,y)] [z] = y
 vallaMenosVencida ((x, y):xs) (z:zs)
-  | porcentajeDeGolesAux y ((x, y):xs) (z:zs) < porcentajeDeGolesAux (vallaMenosVencida xs zs) xs zs = y
+  | z < porcentajeDeGolesAux (vallaMenosVencida xs zs) xs zs = y
   | otherwise = vallaMenosVencida xs zs
