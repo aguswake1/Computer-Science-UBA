@@ -96,7 +96,7 @@ equiposValidosAux ((x, y):xs) = x : y : equiposValidosAux xs
 
 -- 3.
 porcentajeDeGoles :: String -> [(String, String)] -> [Int] -> Float
-porcentajeDeGoles arquero arquerosPorEquipo goles = ( golesRecibidosArquero * 100) `division` atajaronSuplentesAux goles
+porcentajeDeGoles arquero arquerosPorEquipo goles = (golesRecibidosArquero * 100) `division` atajaronSuplentesAux goles
   where golesRecibidosArquero = porcentajeDeGolesAux arquero arquerosPorEquipo goles
 
 porcentajeDeGolesAux :: String -> [(String, String)] -> [Int] -> Int
@@ -110,7 +110,7 @@ division a b = fromIntegral a / fromIntegral b
 
 -- 4.
 vallaMenosVencida :: [(String, String)] -> [Int] -> String
-vallaMenosVencida [(x, y)] [z] = y
+vallaMenosVencida [(x,y)] [z] = y
 vallaMenosVencida ((x, y):xs) (z:zs)
-  | z < head zs = y
+  | porcentajeDeGolesAux y ((x, y):xs) (z:zs) < porcentajeDeGolesAux (vallaMenosVencida xs zs) xs zs = y
   | otherwise = vallaMenosVencida xs zs
