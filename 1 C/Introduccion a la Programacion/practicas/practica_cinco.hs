@@ -246,6 +246,7 @@ nBlancos :: Integer -> [Char]
 nBlancos 0 = ""
 nBlancos n = " " ++ nBlancos (n - 1)
 
+
 -- exercise 5
 -- 1.
 sumaAcumulada :: (Num t) => [t] -> [t]
@@ -270,12 +271,12 @@ descomponerEnPrimos (x:xs) = descomposicion x : descomponerEnPrimos xs
 descomposicion :: Integer -> [Integer]
 descomposicion n
     | esPrimo n = [n]
-    | otherwise = menorDivisorDesde n 2 : descomposicion (n `div` menorDivisorDesde n 2)
+    | otherwise = menorDivisor n 2 : descomposicion (n `div` menorDivisor n 2)
 
-menorDivisorDesde :: Integer -> Integer -> Integer
-menorDivisorDesde n y
+menorDivisor :: Integer -> Integer -> Integer
+menorDivisor n y
     | n `mod` y == 0 = y
-    | otherwise = menorDivisorDesde n (y + 1)
+    | otherwise = menorDivisor n (y + 1)
 
 esPrimo :: Integer -> Bool
 esPrimo n = cantDivisoresHasta n n == 2
