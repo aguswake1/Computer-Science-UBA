@@ -1,3 +1,5 @@
+-- Fuente: http://aprendehaskell.es/main.html
+
 succ 8 -- sucesor
 min 10 11
 max 10 11
