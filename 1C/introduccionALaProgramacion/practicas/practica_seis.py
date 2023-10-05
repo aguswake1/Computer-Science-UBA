@@ -51,7 +51,7 @@ def raiz_cuadrada_de(numero: int) -> float:
 
 # 3.
 def imprimir_dos_veces(estribillo: str) -> str:
-    print(estribillo * 2)
+    return estribillo * 2
 
 
 # 4. m es multiplo de n?
