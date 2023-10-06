@@ -201,13 +201,29 @@ def daVueltaStr(s: str) -> str:
 
 
 """ --- Ejercicio 3 --- """
-# 1.
-# def todosLosEstudiantes() -> "list[str]":
 
+
+# 1.
+def todosLosEstudiantes() -> "list[str]":
+    todos_estudiantes: list[str] = []
+    entrada: str = ""
+    while entrada != "listo":
+        entrada = input(
+            "Ingrese el nombre de sus estudiantes, para finalizar ponga"
+            " 'listo':\n"
+        )
+        todos_estudiantes.append(entrada)
+
+    todos_estudiantes.pop()
+    return todos_estudiantes
+
+
+print(todosLosEstudiantes())
 # 2.
 
 # 3.
 # def sieteYmedio():
+
 
 """ --- Ejercicio 4 ---
 # 1.
