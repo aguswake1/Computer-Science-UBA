@@ -1,3 +1,5 @@
+import random
+
 vocales: list[str] = ["a", "e", "i", "o", "u"]
 
 
@@ -266,14 +268,51 @@ def historialMonedero() -> "list[tuple[str, int]]":
 
 
 # 3.
-# def sieteYmedio():
+def sieteYmedio() -> "list[float]":
+    puntaje: float = 0.0
+    entrada: str = ""
+    mano: list[float] = []
+    valor_carta: float = 0.0
+    while entrada != "plantarse":
+        num_random: float = 8.0
+        while num_random == 8.0 or num_random == 9.0:
+            num_random = float(random.randint(1, 12))
+
+        if num_random >= 10:
+            valor_carta = 0.5
+        else:
+            valor_carta = num_random
+
+        puntaje += valor_carta
+        mano.append(num_random)
+        print(f"Su carta es {num_random}\n puntaje total obtenido: {puntaje}")
+
+        if puntaje > 7.5:
+            print("Se excedio del puntaje!")
+            return mano
+        elif puntaje == 7.5:
+            print("Felicidades por ganar el juego")
+            return mano
+        else:
+            entrada = input("Desea seguir sacando otra carta o plantarse?\n")
+            if entrada == "plantarse":
+                return mano
 
 
-""" --- Ejercicio 5 ---
+""" --- Ejercicio 5 --- """
+
+
 # 1.
-def perteneceACadaUno(s: "list[list[int]]", e: int, res: "list[bool]"):
+def perteneceACadaUno(
+    s: "list[list[int]]", e: int, res: "list[bool]"
+) -> "list[bool]":
+    res.clear()
+    for lista_enteros in s:
+        res.append(e in lista_enteros)
+    return res
 
 
+"""
 # 2.
 def esMatriz(s: "list[list[int]]") -> bool:
 
@@ -283,4 +322,7 @@ def filasOrdenadas(m: "list[list[int]]", res: "list[bool]"):
 
 
 # 4.
+
+
+# 5.
 """
