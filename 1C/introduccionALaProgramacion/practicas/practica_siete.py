@@ -1,4 +1,6 @@
 vocales: list[str] = ["a", "e", "i", "o", "u"]
+
+
 """ --- Ejercicio 1 --- """
 
 
@@ -200,7 +202,39 @@ def daVueltaStr(s: str) -> str:
     return res
 
 
+# 6.
+def eliminarRepetidos(s: str) -> str:
+    res: str = []
+    for caracter in s:
+        if caracter not in res:
+            res.append(caracter)
+
+    return "".join(res)
+
+
 """ --- Ejercicio 3 --- """
+
+
+def aprobado(notas: "list[int]") -> int:
+    total_notas: int = 0
+    nota_menor_cuatro: bool = False
+
+    for nota in notas:
+        total_notas += nota
+        if nota < 4:
+            nota_menor_cuatro = True
+
+    promedio: int = total_notas / len(notas)
+
+    if nota_menor_cuatro or promedio < 4:
+        return 3
+    elif promedio >= 7:
+        return 1
+    else:
+        return 2
+
+
+""" --- Ejercicio 4 --- """
 
 
 # 1.
@@ -218,14 +252,13 @@ def todosLosEstudiantes() -> "list[str]":
     return todos_estudiantes
 
 
-print(todosLosEstudiantes())
 # 2.
 
 # 3.
 # def sieteYmedio():
 
 
-""" --- Ejercicio 4 ---
+""" --- Ejercicio 5 ---
 # 1.
 def perteneceACadaUno(s: "list[list[int]]", e: int, res: "list[bool]"):
 
