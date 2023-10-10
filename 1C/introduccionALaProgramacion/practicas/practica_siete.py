@@ -1,4 +1,6 @@
 import random
+import numpy as np
+
 
 vocales: list[str] = ["a", "e", "i", "o", "u"]
 
@@ -25,7 +27,6 @@ def pertenece3(s: "list[int]", e: int) -> bool:
     for i in range(len(s)):
         if s[i] == e:
             return True
-
     return False
 
 
@@ -33,7 +34,6 @@ def pertenece4(s: "list[int]", e: int) -> bool:
     for elem in s:
         if elem == e:
             return True
-
     return False
 
 
@@ -51,7 +51,6 @@ def perteneceString(s: "list[any]", e: any) -> bool:
     for i in range(len(s)):
         if s[i] == e:
             return True
-
     return False
 
 
@@ -60,7 +59,6 @@ def divideAtodos(s: "list[int]", e: int) -> bool:
     for i in range(len(s)):
         if s[i] % e != 0:
             return False
-
     return True
 
 
@@ -77,7 +75,6 @@ def ordenados(s: "list[int]") -> bool:
     for i in range(len(s) - 1):
         if s[i] >= s[i + 1]:
             return False
-
     return True
 
 
@@ -86,7 +83,6 @@ def mayorQueSiete(s: "list[str]") -> bool:
     for i in range(len(s)):
         if len(s[i]) > 7:
             return True
-
     return False
 
 
@@ -95,8 +91,11 @@ def palindromo(palabra: str) -> bool:
     palabra_invertida: str = ""
     for i in range(len(palabra) - 1, -1, -1):
         palabra_invertida += palabra[i]
-
     return palabra == palabra_invertida
+
+
+def palindromo2(palabra: str) -> bool:
+    palabra == palabra[::-1]
 
 
 # 7.
@@ -312,17 +311,44 @@ def perteneceACadaUno(
     return res
 
 
-"""
 # 2.
 def esMatriz(s: "list[list[int]]") -> bool:
+    misma_cant_filas: bool = True
+    for fila in s:
+        if not (len(fila) == len(s[0])):
+            misma_cant_filas = False
+    return len(s) > 0 and len(s[0]) > 0 and misma_cant_filas
 
 
 # 3.
 def filasOrdenadas(m: "list[list[int]]", res: "list[bool]"):
+    res.clear()
+    for lista_enteros in m:
+        res.append(ordenados(lista_enteros))
+    return res
 
 
 # 4.
+def matrizCuadradaAleatoria(d: int, p: int) -> "list[list[int]]":
+    """
+    Genera una matriz dxd con numeros random y se multiplica
+    por si misma p cantidad de veces
 
+    Args:
+        d (int): tamanio de matriz cuadrada
+        p (int): potencia de la matriz
 
-# 5.
-"""
+    Returns:
+        list[list[int]]: devuelve la matriz cuadrada (dxd)^p
+    """
+    # genera float random entre 0 y 1
+    matriz: list[list[float]] = np.random.random((d, d))
+    while p != 0:
+        for i in range(len(matriz)):
+            for j in range(len(matriz[i])):
+                elemento_nuevo = 0
+                for x in range(d):
+                    elemento_nuevo += matriz[i][x] * matriz[x][j]
+                matriz[i][j] = elemento_nuevo
+        p -= 1
+    return matriz
