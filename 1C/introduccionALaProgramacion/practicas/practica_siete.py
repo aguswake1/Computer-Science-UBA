@@ -253,6 +253,17 @@ def todosLosEstudiantes() -> "list[str]":
 
 
 # 2.
+def historialMonedero() -> "list[tuple[str, int]]":
+    entrada: str = ""
+    res: list[tuple[str, int]] = []
+    while entrada != "X":
+        entrada = input("Ingrese la operacion que desea realizar\n")
+        if entrada != "X":
+            monto: int = int(input("Ingrese el monto de la operacion: "))
+            res.append((entrada, monto))
+
+    return res
+
 
 # 3.
 # def sieteYmedio():
