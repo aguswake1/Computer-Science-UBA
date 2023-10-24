@@ -1,0 +1,4 @@
+esto no es un comentario # confirmo
+# comentario
+#comentario
+    # comentario

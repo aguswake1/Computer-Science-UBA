@@ -321,7 +321,7 @@ def esMatriz(s: "list[list[int]]") -> bool:
 
 
 # 3.
-def filasOrdenadas(m: "list[list[int]]", res: "list[bool]"):
+def filasOrdenadas(m: "list[list[int]]", res: "list[bool]") -> "list[bool]":
     res.clear()
     for lista_enteros in m:
         res.append(ordenados(lista_enteros))
