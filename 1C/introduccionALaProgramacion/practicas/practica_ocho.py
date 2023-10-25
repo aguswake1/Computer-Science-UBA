@@ -1,3 +1,4 @@
+import random
 from queue import LifoQueue as Pila
 from queue import Queue as Cola
 
@@ -129,7 +130,7 @@ def palabras_legibles(nombre_archivo: str) -> list[str]:
         if es_legible(palabra):
             res.append(palabra)
 
-    return contenido
+    return res
 
 
 def es_legible(palabra: str) -> bool:
@@ -150,6 +151,7 @@ def es_legible(palabra: str) -> bool:
 
 
 """   Ejercicio 7   """
+# completar
 
 
 def promedio_estudiante(lu: str) -> float:
@@ -158,21 +160,39 @@ def promedio_estudiante(lu: str) -> float:
     pass
 
 
+# Pila/Lista LIFO (Last In First Out)
 """   Ejercicio 8   """
 
 
 def generar_nros_al_azar(n: int, desde: int, hasta: int) -> Pila:
-    pass
+    res: Pila = Pila()
+    for i in range(n):
+        res.put(random.randint(desde, hasta))
+    return res
 
 
 """   Ejercicio 9   """
 
 
-def cantidad_elementos(p: Pila) -> int:
-    pass
+def cantidad_elementos_pila(p: Pila) -> int:
+    # p.qsize()
+    res: int = 0
+    aux: Pila = Pila()
+    while not p.empty():
+        aux.put(p.get())
+        res += 1
+
+    for i in range(res):
+        p.put(aux.get())
+    return res
 
 
-# Pila/Lista LIFO (Last In First Out)
+# pila = Pila()
+# pila.put(1)
+# pila.put(10)
+# pila.put(5)
+
+
 """   Ejercicio 10   """
 
 
@@ -199,13 +219,33 @@ def buscar_el_maximo_pila(p: Pila) -> int:
 
 
 """   Ejercicio 11   """
+# completar
 
 
 def esta_bien_balanceada(s: str) -> bool:
-    pass
+    p: Pila = Pila()
+
+    for caracter in s:
+        print(caracter)
+
+    return p
+
+
+"""   Ejercicio 12   """
+# completar
 
 
 # Cola/Lista FIFO (First In First Out)
+"""   Ejercicio 13   """
+# completar
+"""   Ejercicio 14   """
+# completar
+
+
+def cantidad_elementos_cola(c: Cola) -> int:
+    pass
+
+
 """   Ejercicio 15   """
 
 
@@ -224,10 +264,42 @@ def buscar_el_maximo_cola(c: Cola) -> int:
 # c.put(6)
 
 
+"""   Ejercicio 16   """
+# completar
+
+
+def armar_secuencia_de_bingo() -> Cola[int]:
+    pass
+
+
+def jugar_carton_de_bingo(carton: list[int], bolillero: Cola[int]) -> int:
+    pass
+
+
+"""   Ejercicio 17   """
+# completar
+
+
+def n_pacientes_urgentes(c: Cola[(int, str, str)]) -> int:
+    pass
+
+
+"""   Ejercicio 18   """
+# completar
+
+
+def a_clientes(
+    c: Cola[(str, int, bool, bool)]
+) -> Cola[(str, int, bool, bool)]:
+    pass
+
+
+# Diccionarios
 """   Ejercicio 19   """
+# completar
 
 
-def agrupar_por_longitud(nombre_archivo: str) -> "dict[int, int]":
+def agrupar_por_longitud(nombre_archivo: str) -> dict[int, int]:
     file = open(nombre_archivo, "r")
     palabras_archivo: list[str] = file.readlines()
     return palabras_archivo
@@ -248,3 +320,53 @@ version 2
 
 lista_gigante_de_palabras = []
 """
+
+
+"""   Ejercicio 20   """
+# completar
+
+"""   Ejercicio 21   """
+# completar
+
+
+def la_palabra_mas_frecuente(nombre_archivo: str) -> str:
+    pass
+
+
+"""   Ejercicio 22   """
+# completar
+
+historiales: dict = {}
+
+
+def visitar_sitio(historiales, usuario, sitio):
+    pass
+
+
+def navegar_atras(historiales, usuario):
+    pass
+
+
+def navegar_adelante(historiales, usuario):
+    pass
+
+
+"""   Ejercicio 23   """
+# completar
+inventario: dict = {}
+
+
+def agregar_producto(inventario, nombre, precio, cantidad):
+    pass
+
+
+def actualizar_stock(inventario, nombre, cantidad):
+    pass
+
+
+def actualizar_precios(inventario, nombre, precio):
+    pass
+
+
+def calcular_valor_inventario(inventario):
+    pass
