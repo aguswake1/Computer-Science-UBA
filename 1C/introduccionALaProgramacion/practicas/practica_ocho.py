@@ -151,22 +151,31 @@ def es_legible(palabra: str) -> bool:
 
 
 """   Ejercicio 7   """
-# completar
 
 
 def promedio_estudiante(lu: str) -> float:
-    file = open("historia_academica.csv", "r")
-    file.read()
-    pass
+    nota_total: float = 0.0
+    cant_materias: int = 0
+    file = open("p8_historia_academica.csv", "r")
+    filas: list[str] = file.read().split("\n")
+
+    for fila in filas:
+        fila_separada: list[str] = fila.split(",")
+        if fila_separada[0] == lu:
+            nota_total += float(fila_separada[3])
+            cant_materias += 1
+
+    res: float = nota_total / cant_materias
+    return res
 
 
 # Pila/Lista LIFO (Last In First Out)
 """   Ejercicio 8   """
 
 
-def generar_nros_al_azar(n: int, desde: int, hasta: int) -> Pila:
+def generar_nros_al_azar_pila(n: int, desde: int, hasta: int) -> Pila:
     res: Pila = Pila()
-    for i in range(n):
+    for _ in range(n):
         res.put(random.randint(desde, hasta))
     return res
 
@@ -176,21 +185,15 @@ def generar_nros_al_azar(n: int, desde: int, hasta: int) -> Pila:
 
 def cantidad_elementos_pila(p: Pila) -> int:
     # p.qsize()
-    res: int = 0
     aux: Pila = Pila()
+    res: int = 0
     while not p.empty():
         aux.put(p.get())
         res += 1
 
-    for i in range(res):
+    for _ in range(res):
         p.put(aux.get())
     return res
-
-
-# pila = Pila()
-# pila.put(1)
-# pila.put(10)
-# pila.put(5)
 
 
 """   Ejercicio 10   """
@@ -199,6 +202,7 @@ def cantidad_elementos_pila(p: Pila) -> int:
 def buscar_el_maximo_pila(p: Pila) -> int:
     maximo: int = p.get()
     aux: Pila = Pila()
+    aux.put(maximo)
 
     while not p.empty():
         elem_actual: int = p.get()
@@ -207,15 +211,8 @@ def buscar_el_maximo_pila(p: Pila) -> int:
             maximo = elem_actual
 
     while not aux.empty():
-        elem_actual = aux.get()
-        p.put(elem_actual)
+        p.put(aux.get())
     return maximo
-
-
-# pila = Pila()
-# pila.put(1)
-# pila.put(10)
-# pila.put(5)
 
 
 """   Ejercicio 11   """
@@ -237,31 +234,48 @@ def esta_bien_balanceada(s: str) -> bool:
 
 # Cola/Lista FIFO (First In First Out)
 """   Ejercicio 13   """
-# completar
+
+
+def generar_nros_al_azar_cola(n: int, desde: int, hasta: int) -> Cola:
+    numeros_random: Pila = generar_nros_al_azar_pila(n, desde, hasta)
+    res: Cola = Cola()
+
+    for _ in range(n):
+        res.put(numeros_random.get())
+    return res
+
+
 """   Ejercicio 14   """
-# completar
 
 
 def cantidad_elementos_cola(c: Cola) -> int:
-    pass
+    aux: Cola = Cola()
+    res: int = 0
+    while not c.empty():
+        aux.put(c.get())
+        res += 1
+
+    while not aux.empty():
+        c.put(aux.get())
+    return res
 
 
 """   Ejercicio 15   """
 
 
 def buscar_el_maximo_cola(c: Cola) -> int:
+    aux: Cola = Cola()
     maximo = c.get()
+    aux.put(maximo)
     while not c.empty():
         elem_actual = c.get()
+        aux.put(elem_actual)
         if maximo < elem_actual:
             maximo = elem_actual
+
+    while not aux.empty():
+        c.put(aux.get())
     return maximo
-
-
-# c = Cola()
-# c.put(1)
-# c.put(5)
-# c.put(6)
 
 
 """   Ejercicio 16   """
