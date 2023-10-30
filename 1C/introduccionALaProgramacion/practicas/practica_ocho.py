@@ -279,23 +279,67 @@ def buscar_el_maximo_cola(c: Cola) -> int:
 
 
 """   Ejercicio 16   """
-# completar
 
 
+# Es correcta la implementacion?
 def armar_secuencia_de_bingo() -> Cola[int]:
-    pass
+    res: Cola[int] = Cola()
+    aux: list[int] = []
+    while len(aux) < 100:
+        r_num = random.randint(0, 99)
+        if r_num not in aux:
+            aux.append(r_num)
+            res.put(r_num)
+    return res
+    # Otra implementacion:
+
+    # res: Cola[int] = Cola()
+    # numeros_disponibles = list(range(100))
+    # random.shuffle(numeros_disponibles)
+    # for numero in numeros_disponibles:
+    #     res.put(numero)
+    # return res
 
 
+# Esta bien hecha la restauracion?  bolillero = aux_bolillero
 def jugar_carton_de_bingo(carton: list[int], bolillero: Cola[int]) -> int:
-    pass
+    aux_carton: list[int] = carton
+    aux_bolillero: Cola[int] = Cola()
+    res: int = 0
+    while len(carton) > 0:
+        carton_actualizado: list[int] = []
+        bolilla: int = bolillero.get()
+        aux_bolillero.put(bolilla)
+        for num in carton:
+            if not (bolilla == num):
+                carton_actualizado.append(num)
+        carton = carton_actualizado
+        res += 1
+
+    carton = aux_carton
+    return carton, bolillero.queue
 
 
+print(
+    jugar_carton_de_bingo(
+        [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], armar_secuencia_de_bingo()
+    )
+)
 """   Ejercicio 17   """
-# completar
 
 
 def n_pacientes_urgentes(c: Cola[(int, str, str)]) -> int:
-    pass
+    res: int = 0
+    aux: Cola[(int, str, str)] = Cola()
+    while not c.empty():
+        paciente: (int, str, str) = c.get()
+        aux.put(paciente)
+        if paciente[0] <= 3:
+            res += 1
+
+    while not aux.empty():
+        c.put(aux.get())
+    return res
 
 
 """   Ejercicio 18   """
