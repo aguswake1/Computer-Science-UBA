@@ -9,11 +9,11 @@ vocales: list[str] = ["a", "e", "i", "o", "u"]
 
 
 # 1.
-def pertenece(s: "list[int]", e: int) -> bool:
+def pertenece(s: list[int], e: int) -> bool:
     return e in s
 
 
-def pertenece2(s: "list[int]", e: int) -> bool:
+def pertenece2(s: list[int], e: int) -> bool:
     i: int = 0
     while i < len(e):
         if s[i] == e:
@@ -23,14 +23,14 @@ def pertenece2(s: "list[int]", e: int) -> bool:
     return False
 
 
-def pertenece3(s: "list[int]", e: int) -> bool:
+def pertenece3(s: list[int], e: int) -> bool:
     for i in range(len(s)):
         if s[i] == e:
             return True
     return False
 
 
-def pertenece4(s: "list[int]", e: int) -> bool:
+def pertenece4(s: list[int], e: int) -> bool:
     for elem in s:
         if elem == e:
             return True
@@ -47,7 +47,7 @@ def pertenece5(s: "list[int]", e: int) -> bool:
 """
 
 
-def pertenece_string(s: "list[any]", e: any) -> bool:
+def pertenece_string(s: list[any], e: any) -> bool:
     for i in range(len(s)):
         if s[i] == e:
             return True
@@ -55,7 +55,7 @@ def pertenece_string(s: "list[any]", e: any) -> bool:
 
 
 # 2.
-def divide_a_todos(s: "list[int]", e: int) -> bool:
+def divide_a_todos(s: list[int], e: int) -> bool:
     for i in range(len(s)):
         if s[i] % e != 0:
             return False
@@ -63,7 +63,7 @@ def divide_a_todos(s: "list[int]", e: int) -> bool:
 
 
 # 3.
-def suma_total(s: "list[int]") -> int:
+def suma_total(s: list[int]) -> int:
     res: int = 0
     for i in range(len(s)):
         res += s[i]
@@ -71,7 +71,7 @@ def suma_total(s: "list[int]") -> int:
 
 
 # 4.
-def ordenados(s: "list[int]") -> bool:
+def ordenados(s: list[int]) -> bool:
     for i in range(len(s) - 1):
         if s[i] >= s[i + 1]:
             return False
@@ -79,7 +79,7 @@ def ordenados(s: "list[int]") -> bool:
 
 
 # 5.
-def mayor_que_siete(s: "list[str]") -> bool:
+def mayor_que_siete(s: list[str]) -> bool:
     for i in range(len(s)):
         if len(s[i]) > 7:
             return True
@@ -123,7 +123,7 @@ def es_verde(passw: str) -> bool:
 
 
 # 8.
-def transacciones(historial: "list[tuple[str, int]]") -> int:
+def transacciones(historial: list[tuple[str, int]]) -> int:
     saldo_final: int = 0
     for elem in historial:
         if elem[0] == "I":
@@ -147,7 +147,7 @@ def tres_vocales_distintas(palabra: str) -> bool:
 
 
 # 1.
-def cero_en_index_par(listaNum: "list[int]") -> "list[int]":
+def cero_en_index_par(listaNum: list[int]) -> list[int]:
     for i in range(1, len(listaNum)):
         if i % 2 == 0:
             listaNum[i] = 0
@@ -155,7 +155,7 @@ def cero_en_index_par(listaNum: "list[int]") -> "list[int]":
 
 
 # 2.
-def cero_en_index_par2(listaNum: "list[int]") -> "list[int]":
+def cero_en_index_par2(listaNum: list[int]) -> list[int]:
     nueva_lista: list[int] = [listaNum[0]]
 
     for i in range(1, len(listaNum)):
@@ -216,7 +216,7 @@ def eliminar_repetidos(s: str) -> str:
 """ --- Ejercicio 3 --- """
 
 
-def aprobado(notas: "list[int]") -> int:
+def aprobado(notas: list[int]) -> int:
     total_notas: int = 0
     nota_menor_cuatro: bool = False
 
@@ -239,7 +239,7 @@ def aprobado(notas: "list[int]") -> int:
 
 
 # 1.
-def todos_los_estudiantes() -> "list[str]":
+def todos_los_estudiantes() -> list[str]:
     todos_estudiantes: list[str] = []
     entrada: str = ""
     while entrada != "listo":
@@ -254,7 +254,7 @@ def todos_los_estudiantes() -> "list[str]":
 
 
 # 2.
-def historial_monedero() -> "list[tuple[str, int]]":
+def historial_monedero() -> list[tuple[str, int]]:
     entrada: str = ""
     res: list[tuple[str, int]] = []
     while entrada != "X":
@@ -267,7 +267,7 @@ def historial_monedero() -> "list[tuple[str, int]]":
 
 
 # 3.
-def siete_y_medio() -> "list[float]":
+def siete_y_medio() -> list[float]:
     puntaje: float = 0.0
     entrada: str = ""
     mano: list[float] = []
@@ -303,8 +303,8 @@ def siete_y_medio() -> "list[float]":
 
 # 1.
 def pertenece_a_cada_uno(
-    s: "list[list[int]]", e: int, res: "list[bool]"
-) -> "list[bool]":
+    s: list[list[int]], e: int, res: list[bool]
+) -> list[bool]:
     res.clear()
     for lista_enteros in s:
         res.append(e in lista_enteros)
@@ -312,7 +312,7 @@ def pertenece_a_cada_uno(
 
 
 # 2.
-def es_matriz(s: "list[list[int]]") -> bool:
+def es_matriz(s: list[list[int]]) -> bool:
     misma_cant_filas: bool = True
     for fila in s:
         if not (len(fila) == len(s[0])):
@@ -321,7 +321,7 @@ def es_matriz(s: "list[list[int]]") -> bool:
 
 
 # 3.
-def filas_ordenadas(m: "list[list[int]]", res: "list[bool]") -> "list[bool]":
+def filas_ordenadas(m: list[list[int]], res: list[bool]) -> list[bool]:
     res.clear()
     for lista_enteros in m:
         res.append(ordenados(lista_enteros))
@@ -329,7 +329,7 @@ def filas_ordenadas(m: "list[list[int]]", res: "list[bool]") -> "list[bool]":
 
 
 # 4.
-def matriz_cuadrada_aleatoria(d: int, p: int) -> "list[list[int]]":
+def matriz_cuadrada_aleatoria(d: int, p: int) -> list[list[int]]:
     """
     Genera una matriz dxd con numeros random y se multiplica
     por si misma p cantidad de veces
