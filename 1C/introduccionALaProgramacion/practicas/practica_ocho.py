@@ -158,6 +158,7 @@ def promedio_estudiante(lu: str) -> float:
     cant_materias: int = 0
     file = open("p8_historia_academica.csv", "r")
     filas: list[str] = file.read().split("\n")
+    file.close()
 
     for fila in filas:
         fila_separada: list[str] = fila.split(",")
@@ -320,11 +321,11 @@ def jugar_carton_de_bingo(carton: list[int], bolillero: Cola[int]) -> int:
     return carton, bolillero.queue
 
 
-print(
-    jugar_carton_de_bingo(
-        [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], armar_secuencia_de_bingo()
-    )
-)
+# print(
+#     jugar_carton_de_bingo(
+#         [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], armar_secuencia_de_bingo()
+#     )
+# )
 """   Ejercicio 17   """
 
 
@@ -354,34 +355,44 @@ def a_clientes(
 
 # Diccionarios
 """   Ejercicio 19   """
-# completar
 
 
 def agrupar_por_longitud(nombre_archivo: str) -> dict[int, int]:
+    res: dict[int, int] = {}
     file = open(nombre_archivo, "r")
-    palabras_archivo: list[str] = file.readlines()
-    return palabras_archivo
-
-
-"""
-for linea in palabra_archivo:
-    palabras = linea.split()
-    for palabra in palabras:
-        clave = len(palabra)
-        if d.get(clave) is not None:
-
-            d[clave] += 1
+    palabras_archivo: list[str] = file.read().split()
+    file.close()
+    for palabra in palabras_archivo:
+        if len(palabra) not in res.keys():
+            res[len(palabra)] = 1
         else:
-            d[clave] = 1
-
-version 2
-
-lista_gigante_de_palabras = []
-"""
+            res[len(palabra)] += 1
+    return res
 
 
 """   Ejercicio 20   """
-# completar
+
+
+def promedios_estudiantes() -> dict[str, float]:
+    res: dict[str, float] = {}
+    file = open("p8_historia_academica.csv", "r")
+    filas: list[str] = file.read().split("\n")[1:]
+    file.close()
+    for fila in filas:
+        fila_separada: list[str] = fila.split(",")
+        if fila_separada[0] not in res.keys():
+            res[fila_separada[0]] = [float(fila_separada[3]), 1]
+        else:
+            res[fila_separada[0]] = [
+                res[fila_separada[0]][0] + float(fila_separada[3]),
+                res[fila_separada[0]][1] + 1,
+            ]
+
+    for llave, valor in res.items():
+        valor = valor[0] / valor[1]
+        res[llave] = valor
+    return res
+
 
 """   Ejercicio 21   """
 # completar
