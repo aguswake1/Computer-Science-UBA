@@ -217,7 +217,7 @@ def buscar_el_maximo_pila(p: Pila) -> int:
 
 
 """   Ejercicio 11   """
-# completar
+# completar cant igual de () y que nunca se cierre cuando no hay abierto
 
 
 def esta_bien_balanceada(s: str) -> bool:
@@ -230,7 +230,7 @@ def esta_bien_balanceada(s: str) -> bool:
 
 
 """   Ejercicio 12   """
-# completar
+# def notacion_polaca_inversa(notacion: str):
 
 
 # Cola/Lista FIFO (First In First Out)
@@ -389,53 +389,107 @@ def promedios_estudiantes() -> dict[str, float]:
             ]
 
     for llave, valor in res.items():
-        valor = valor[0] / valor[1]
-        res[llave] = valor
+        res[llave] = valor[0] / valor[1]
     return res
 
 
 """   Ejercicio 21   """
-# completar
 
 
 def la_palabra_mas_frecuente(nombre_archivo: str) -> str:
-    pass
+    res: str = ""
+    almacen_frecuencia_palabras: dict = {}
+    file = open(nombre_archivo, "r")
+    palabras_archivo: list = file.read().split()
+    file.close()
+    for palabra in palabras_archivo:
+        if palabra not in almacen_frecuencia_palabras.keys():
+            almacen_frecuencia_palabras[palabra] = frecuencia_palabra(
+                palabras_archivo, palabra
+            )
+
+    mayor_frecuencia: int = 0
+    for llave, frecuencia in almacen_frecuencia_palabras.items():
+        if frecuencia > mayor_frecuencia:
+            mayor_frecuencia = frecuencia
+            res = llave
+    return res
+
+
+def frecuencia_palabra(lista: list[str], palabra: str) -> int:
+    res: int = 0
+    for elem in lista:
+        if elem == palabra:
+            res += 1
+    return res
 
 
 """   Ejercicio 22   """
-# completar
-
-historiales: dict = {}
+historiales: dict[str, (Pila, Pila)] = {}
 
 
-def visitar_sitio(historiales, usuario, sitio):
-    pass
+def visitar_sitio(
+    historiales: dict[str, (Pila, Pila)], usuario: str, sitio: str
+) -> None:
+    if usuario in historiales.keys():
+        historiales[usuario][0].put(sitio)
+    else:
+        historiales[usuario] = (Pila(), Pila())
+        historiales[usuario][0].put(sitio)
 
 
-def navegar_atras(historiales, usuario):
-    pass
+def navegar_atras(historiales: dict[str, (Pila, Pila)], usuario: str) -> None:
+    sitio_previo: str = historiales[usuario][0].get()
+    historiales[usuario][1].put(sitio_previo)
 
 
-def navegar_adelante(historiales, usuario):
-    pass
+def navegar_adelante(
+    historiales: dict[str, (Pila, Pila)], usuario: str
+) -> None:
+    sitio_posterior: str = historiales[usuario][1].get()
+    historiales[usuario][0].put(sitio_posterior)
 
 
 """   Ejercicio 23   """
-# completar
-inventario: dict = {}
+inventario: dict[str, dict[str, float, str, int]] = {}
 
 
-def agregar_producto(inventario, nombre, precio, cantidad):
-    pass
+def agregar_producto(
+    inventario: dict[str, dict[str, float, str, int]],
+    nombre: str,
+    precio: float,
+    cantidad: int,
+) -> None:
+    info_producto: dict[str, float, str, int] = {
+        "precio": precio,
+        "cantidad": cantidad,
+    }
+    inventario[nombre] = info_producto
 
 
-def actualizar_stock(inventario, nombre, cantidad):
-    pass
+def actualizar_stock(
+    inventario: dict[str, dict[str, float, str, int]],
+    nombre: str,
+    cantidad: int,
+) -> None:
+    inventario[nombre]["cantidad"] = cantidad
 
 
-def actualizar_precios(inventario, nombre, precio):
-    pass
+def actualizar_precios(
+    inventario: dict[str, dict[str, float, str, int]],
+    nombre: str,
+    precio: float,
+) -> None:
+    inventario[nombre]["precio"] = precio
 
 
-def calcular_valor_inventario(inventario):
-    pass
+def calcular_valor_inventario(
+    inventario: dict[str, dict[str, float, str, int]]
+) -> float:
+    res: float = 0.0
+    for producto in inventario.values():
+        res += producto["cantidad"] * producto["precio"]
+    return res
+
+
+# in out inout
