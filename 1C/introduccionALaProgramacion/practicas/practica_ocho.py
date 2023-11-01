@@ -217,20 +217,50 @@ def buscar_el_maximo_pila(p: Pila) -> int:
 
 
 """   Ejercicio 11   """
-# completar cant igual de () y que nunca se cierre cuando no hay abierto
 
 
 def esta_bien_balanceada(s: str) -> bool:
     p: Pila = Pila()
-
-    for caracter in s:
-        print(caracter)
-
-    return p
+    parentesis_abiertos: int = 0
+    parentesis_cerrados: int = 0
+    res: bool = True
+    formula_dividida = s.replace("", " ").split()
+    for i in range(len(formula_dividida) - 1, -1, -1):
+        p.put(formula_dividida[i])
+    while not p.empty():
+        elem = p.get()
+        if elem == "(":
+            parentesis_abiertos += 1
+        elif elem == ")":
+            parentesis_cerrados += 1
+        if parentesis_cerrados > parentesis_abiertos:
+            return False
+    return res
 
 
 """   Ejercicio 12   """
-# def notacion_polaca_inversa(notacion: str):
+
+
+def evaluar_expresion(expresion: str) -> int:
+    res: int = 0
+    p: Pila = Pila()
+    expresion_dividida = expresion.split()
+    for i in range(len(expresion_dividida) - 1, -1, -1):
+        p.put(expresion_dividida[i])
+    while cantidad_elementos_pila(p) > 1:
+        operando1: int = int(p.get())
+        operando2: int = int(p.get())
+        operador: str = p.get()
+        if operador == "+":
+            res = operando1 + operando2
+        elif operador == "-":
+            res = operando1 - operando2
+        elif operador == "*":
+            res = operando1 * operando2
+        else:
+            res = operando1 // operando2
+        p.put(res)
+    return res
 
 
 # Cola/Lista FIFO (First In First Out)
@@ -344,13 +374,39 @@ def n_pacientes_urgentes(c: Cola[(int, str, str)]) -> int:
 
 
 """   Ejercicio 18   """
-# completar
+"""
+problema () {
+    requiere: { True }
+    asegura: {
+res = Cola and para todo i perteneciente a los enteros, res[i] > res[i+1]
+}
+}
+"""
 
 
-def a_clientes(
+def _a_clientes(
     c: Cola[(str, int, bool, bool)]
 ) -> Cola[(str, int, bool, bool)]:
-    pass
+    res: Cola[(str, int, bool, bool)] = Cola()
+    aux: Cola[(str, int, bool, bool)] = Cola()
+    for _ in range(c.qsize()):
+        elem = c.get()
+        aux.put(elem)
+        if elem[3]:
+            res.put(elem)
+        else:
+            c.put(elem)
+    for _ in range(c.qsize()):
+        elem = c.get()
+        if elem[2]:
+            res.put(elem)
+        else:
+            c.put(elem)
+    while not c.empty():
+        res.put(c.get())
+    while not aux.empty():
+        c.put(aux.get())
+    return res
 
 
 # Diccionarios
